@@ -2,6 +2,9 @@ import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public final class FileUtils {
 
@@ -12,5 +15,9 @@ public final class FileUtils {
     public static void zip(String name, String path) throws ZipException {
         ZipFile zipFile = new ZipFile(name);
         zipFile.addFolder(new File(path));
+    }
+
+    public static void deleteFileToPath(String pathToFile, String name) throws IOException {
+        Files.deleteIfExists(Path.of(pathToFile));
     }
 }
