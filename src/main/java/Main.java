@@ -9,6 +9,6 @@ public class Main {
 //    }
 
     public static void main(String[] args) throws IOException {
-        FileUtils.deleteFileToPath(HOME + "\\Desktop\\img", "1 (1).jpg");
+        FileUtils.deleteFileToPathWithoutDirectory(HOME + "\\Desktop\\img", "1 (1).jpg");
     }
 }

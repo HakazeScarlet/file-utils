@@ -17,7 +17,9 @@ public final class FileUtils {
         zipFile.addFolder(new File(path));
     }
 
-    public static void deleteFileToPath(String pathToFile, String name) throws IOException {
-        Files.deleteIfExists(Path.of(pathToFile));
+    public static void deleteFileToPathWithoutDirectory(String pathToFile, String name) throws IOException {
+        Files.walk(Path.of(pathToFile))
+                .map(Path::toFile)
+                .forEach(File::delete);
     }
 }
