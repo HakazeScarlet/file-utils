@@ -17,9 +17,16 @@ public final class FileUtils {
         zipFile.addFolder(new File(path));
     }
 
-    public static void deleteFileToPathWithoutDirectory(String pathToFile, String name) throws IOException {
+    public static void deleteFilesToPathWithoutDirectory(String pathToFile) throws IOException {
         Files.walk(Path.of(pathToFile))
                 .map(Path::toFile)
                 .forEach(File::delete);
+    }
+
+    public static void deleteDirectoryWithFiles(String pathToFile) throws IOException {
+        Files.walk(Path.of(pathToFile))
+                .map(Path::toFile)
+                .forEach(File::delete);
+        Files.delete(Path.of(pathToFile));
     }
 }
