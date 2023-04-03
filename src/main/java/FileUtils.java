@@ -24,9 +24,11 @@ public final class FileUtils {
     }
 
     public static void deleteDirectoryWithFiles(String pathToFile) throws IOException {
-        Files.walk(Path.of(pathToFile))
-                .map(Path::toFile)
-                .forEach(File::delete);
-        Files.delete(Path.of(pathToFile));
+        if (Files.exists(Path.of(pathToFile))) {
+            Files.walk(Path.of(pathToFile))
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+            deleteDirectoryWithFiles(pathToFile);
+        }
     }
 }
