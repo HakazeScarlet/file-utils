@@ -31,4 +31,8 @@ public final class FileUtils {
             deleteDirectoryWithFiles(pathToFile);
         }
     }
+
+    public static void checkFilesToEquals(String pathToFile1, String pathToFile2) throws IOException {
+        Files.isSameFile(Path.of(pathToFile1), Path.of(pathToFile2));
+    }
 }
