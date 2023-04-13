@@ -13,6 +13,7 @@ public final class FileUtils {
         // hide public constructor
     }
 
+    // TODO: create unzip method
     public static void zip(String name, String path) throws ZipException {
         ZipFile zipFile = new ZipFile(name);
         zipFile.addFolder(new File(path));
@@ -33,15 +34,29 @@ public final class FileUtils {
         }
     }
 
+    // TODO: handle next case
+    /*
+    * file1.txt
+    * test
+    * test
+    *
+    * file2.txt
+    * test
+    * test
+    * test
+    * test
+    *
+    * and vice versa
+    * */
     public static boolean checkFilesToEquals(String pathToFile1, String pathToFile2) throws IOException {
         try (
-            BufferedReader checkedFile1 = Files.newBufferedReader(Path.of(pathToFile1));
-            BufferedReader checkedFile2 = Files.newBufferedReader(Path.of(pathToFile2))
+            BufferedReader file2 = Files.newBufferedReader(Path.of(pathToFile1));
+            BufferedReader file1 = Files.newBufferedReader(Path.of(pathToFile2))
         ) {
             String lineInFile1;
             String lineInFile2;
-            while ((lineInFile1 = checkedFile1.readLine()) != null) {
-                lineInFile2 = checkedFile2.readLine();
+            while ((lineInFile1 = file1.readLine()) != null) {
+                lineInFile2 = file2.readLine();
                 if (!lineInFile1.equals(lineInFile2)) {
                     return false;
                 }
