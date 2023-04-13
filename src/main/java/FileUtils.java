@@ -20,30 +20,30 @@ public final class FileUtils {
 
     public static void deleteFilesToPathWithoutDirectory(String pathToFile) throws IOException {
         Files.walk(Path.of(pathToFile))
-                .map(Path::toFile)
-                .forEach(File::delete);
+            .map(Path::toFile)
+            .forEach(File::delete);
     }
 
     public static void deleteDirectoryWithFiles(String pathToFile) throws IOException {
         if (Files.exists(Path.of(pathToFile))) {
             Files.walk(Path.of(pathToFile))
-                    .map(Path::toFile)
-                    .forEach(File::delete);
+                .map(Path::toFile)
+                .forEach(File::delete);
             deleteDirectoryWithFiles(pathToFile);
         }
     }
 
     public static boolean checkFilesToEquals(String pathToFile1, String pathToFile2) throws IOException {
-        try (BufferedReader checkedFile1 = Files.newBufferedReader(Path.of(pathToFile1));
-             BufferedReader checkedFile2 = Files.newBufferedReader(Path.of(pathToFile2))) {
-
-            String lineInFile1 = "", lineInFile2 = "";
+        try (
+            BufferedReader checkedFile1 = Files.newBufferedReader(Path.of(pathToFile1));
+            BufferedReader checkedFile2 = Files.newBufferedReader(Path.of(pathToFile2))
+        ) {
+            String lineInFile1;
+            String lineInFile2;
             while ((lineInFile1 = checkedFile1.readLine()) != null) {
-                    lineInFile2 = checkedFile2.readLine();
+                lineInFile2 = checkedFile2.readLine();
                 if (!lineInFile1.equals(lineInFile2)) {
                     return false;
-                } else {
-                    return true;
                 }
             }
         }
