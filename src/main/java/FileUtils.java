@@ -33,26 +33,20 @@ public final class FileUtils {
         }
     }
 
-    public static long checkFilesToEquals(String pathToFile1, String pathToFile2) throws IOException {
+    public static boolean checkFilesToEquals(String pathToFile1, String pathToFile2) throws IOException {
         try (BufferedReader checkedFile1 = Files.newBufferedReader(Path.of(pathToFile1));
              BufferedReader checkedFile2 = Files.newBufferedReader(Path.of(pathToFile2))) {
 
-            long lineNumber = 1;
             String lineInFile1 = "", lineInFile2 = "";
             while ((lineInFile1 = checkedFile1.readLine()) != null) {
-                lineInFile2 = checkedFile2.readLine();
-                if (lineInFile1.equals(lineInFile2)) {
-                    lineNumber++;
-                    System.out.println("Lines are equals");
+                    lineInFile2 = checkedFile2.readLine();
+                if (!lineInFile1.equals(lineInFile2)) {
+                    return false;
                 } else {
-                    System.out.println("Lines are not equals");
+                    return true;
                 }
             }
-            if (checkedFile2.readLine() == null) {
-                return -1;
-            } else {
-                return lineNumber;
-            }
         }
+        return true;
     }
 }
